@@ -658,24 +658,16 @@ const QuickRow = styled.div`
 `;
 
 const QuickBtn = styled.button`
-  background: rgba(255, 255, 255, 0.05);
-  color: #FFFFFF;
-  border: 1px solid rgba(127, 90, 240, 0.3);
+  background: ${({ theme }) => theme.colors.card};
+  color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary}33;
   border-radius: 12px;
   padding: 10px 0;
   font-size: 14px;
   font-weight: 800;
   cursor: pointer;
   width: 100%;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  
-  &:hover { 
-    background: rgba(127, 90, 240, 0.15); 
-    border-color: rgba(127, 90, 240, 0.5);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(127, 90, 240, 0.2);
-  }
+  &:hover { background: ${({ theme }) => `${theme.colors.primary}15`}; border-color: ${({ theme }) => theme.colors.primary}; }
 `;
 
 const ProbRow = styled.div`
@@ -762,7 +754,7 @@ const FeeInfo = styled.div`
 `;
 
 const FeeLabel = styled.span`
-  color: #A1A1AA;
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;

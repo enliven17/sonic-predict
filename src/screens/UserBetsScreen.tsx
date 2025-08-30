@@ -99,8 +99,8 @@ export default function UserBetsScreen() {
             <StatValue>{sonicScore}</StatValue>
           </StatItem>
           <StatItem title="Total Bet Volume">
-            <StatLabel><FaCoins style={{marginRight: 6, color: '#00d4ff'}}/>Volume</StatLabel>
-            <StatValue>{totalBetVolume.toFixed(2)} KALE</StatValue>
+            <StatLabel><FaCoins style={{marginRight: 6, color: '#2CB67D'}}/>Volume</StatLabel>
+            <StatValue>{totalBetVolume.toFixed(2)} S</StatValue>
           </StatItem>
         </Stats>
         <BalanceActions>
@@ -122,8 +122,8 @@ export default function UserBetsScreen() {
           </EmptyState>
         ) : (
           <BetsGrid>
-            {myBets.map(bet => (
-              <BetCard key={bet.id}>
+            {myBets.map((bet, index) => (
+              <BetCard key={`${bet.id}-${bet.timestamp}-${index}`}>
                 <BetHeader>
                   <BetMarket>{bet.market.title}</BetMarket>
                   <BetStatus>
@@ -145,7 +145,7 @@ export default function UserBetsScreen() {
                   
                   <BetDetail>
                     <DetailLabel>Amount</DetailLabel>
-                    <DetailValue $amount>{bet.amount} KALE</DetailValue>
+                    <DetailValue $amount>{bet.amount} S</DetailValue>
                   </BetDetail>
                   
                   <BetDetail>
@@ -203,7 +203,7 @@ export default function UserBetsScreen() {
                   
                   <RewardDetail>
                     <DetailLabel>Amount</DetailLabel>
-                    <DetailValue $reward>{r.amount.toFixed(4)} KALE</DetailValue>
+                    <DetailValue $reward>{r.amount.toFixed(4)} S</DetailValue>
                   </RewardDetail>
                 </RewardDetails>
               </RewardCard>
@@ -364,16 +364,19 @@ const BetsGrid = styled.div`
 `;
 
 const BetCard = styled.div`
-  background: ${({ theme }) => theme.colors.card};
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(127, 90, 240, 0.2);
+    border-color: rgba(127, 90, 240, 0.3);
+    background: rgba(255, 255, 255, 0.08);
   }
   
   @media (max-width: 600px) {
@@ -403,12 +406,12 @@ const BetStatus = styled.div`
 `;
 
 const WinIcon = styled.div`
-  color: ${({ theme }) => theme.colors.accentGreen};
+  color: #2CB67D;
   font-size: 20px;
 `;
 
 const LoseIcon = styled.div`
-  color: ${({ theme }) => theme.colors.accentRed};
+  color: #F25F4C;
   font-size: 20px;
 `;
 
@@ -443,11 +446,11 @@ const DetailLabel = styled.span`
 `;
 
 const DetailValue = styled.span<{ $side?: string; $amount?: boolean; $reward?: boolean }>`
-  color: ${({ theme, $side, $amount, $reward }) => {
-    if ($side === "yes") return theme.colors.accentGreen;
-    if ($side === "no") return theme.colors.accentRed;
-    if ($amount || $reward) return theme.colors.primary;
-    return theme.colors.text;
+  color: ${({ $side, $amount, $reward }) => {
+    if ($side === "yes") return '#2CB67D';
+    if ($side === "no") return '#F25F4C';
+    if ($amount || $reward) return '#7F5AF0';
+    return '#FFFFFF';
   }};
   font-size: 14px;
   font-weight: 600;
@@ -484,16 +487,19 @@ const RewardsGrid = styled.div`
 `;
 
 const RewardCard = styled.div`
-  background: ${({ theme }) => theme.colors.card};
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(127, 90, 240, 0.2);
+    border-color: rgba(127, 90, 240, 0.3);
+    background: rgba(255, 255, 255, 0.08);
   }
   
   @media (max-width: 600px) {
@@ -514,14 +520,14 @@ const RewardIcon = styled.div`
 `;
 
 const RewardStatus = styled.span<{ $claimed: boolean }>`
-  color: ${({ theme, $claimed }) => $claimed ? theme.colors.textSecondary : theme.colors.accentGreen};
+  color: ${({ $claimed }) => $claimed ? '#A1A1AA' : '#2CB67D'};
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 4px 12px;
   border-radius: 20px;
-  background: ${({ theme, $claimed }) => $claimed ? theme.colors.background : `${theme.colors.accentGreen}20`};
+  background: ${({ $claimed }) => $claimed ? 'rgba(15, 15, 35, 0.8)' : 'rgba(44, 182, 125, 0.2)'};
 `;
 
 const RewardDetails = styled.div`
@@ -541,16 +547,16 @@ const RewardDetail = styled.div`
 `;
 
 const Win = styled.span`
-  color: ${({ theme }) => theme.colors.accentGreen};
+  color: #2CB67D;
   font-weight: 600;
 `;
 
 const Lose = styled.span`
-  color: ${({ theme }) => theme.colors.accentRed};
+  color: #F25F4C;
   font-weight: 600;
 `;
 
 const Open = styled.span`
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: #A1A1AA;
   font-weight: 600;
 `; 

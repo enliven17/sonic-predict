@@ -53,30 +53,45 @@ export const GlobalNotification: React.FC<GlobalNotificationProps> = ({
   const getBackgroundColor = () => {
     switch (notification.type) {
       case 'success':
-        return '#10b981';
+        return 'rgba(44, 182, 125, 0.1)'; // Sonic yeşil glass
       case 'error':
-        return '#ef4444';
+        return 'rgba(242, 95, 76, 0.1)'; // Sonic kırmızı glass
       case 'warning':
-        return '#f59e0b';
+        return 'rgba(255, 137, 6, 0.1)'; // Sonic turuncu glass
       case 'info':
-        return '#3b82f6';
+        return 'rgba(127, 90, 240, 0.1)'; // Sonic mor glass
       default:
-        return '#3b82f6';
+        return 'rgba(127, 90, 240, 0.1)';
     }
   };
 
   const getBorderColor = () => {
     switch (notification.type) {
       case 'success':
-        return '#059669';
+        return 'rgba(44, 182, 125, 0.3)'; // Sonic yeşil border
       case 'error':
-        return '#dc2626';
+        return 'rgba(242, 95, 76, 0.3)'; // Sonic kırmızı border
       case 'warning':
-        return '#d97706';
+        return 'rgba(255, 137, 6, 0.3)'; // Sonic turuncu border
       case 'info':
-        return '#2563eb';
+        return 'rgba(127, 90, 240, 0.3)'; // Sonic mor border
       default:
-        return '#2563eb';
+        return 'rgba(127, 90, 240, 0.3)';
+    }
+  };
+
+  const getTextColor = () => {
+    switch (notification.type) {
+      case 'success':
+        return '#2CB67D'; // Sonic yeşil
+      case 'error':
+        return '#F25F4C'; // Sonic kırmızı
+      case 'warning':
+        return '#FF8906'; // Sonic turuncu
+      case 'info':
+        return '#7F5AF0'; // Sonic mor
+      default:
+        return '#7F5AF0';
     }
   };
 
@@ -128,8 +143,8 @@ const NotificationContent = styled.div<{
   $backgroundColor: string;
   $borderColor: string;
 }>`
-  background: ${({ theme }) => theme.colors.card};
-  border: 2px solid ${({ $borderColor }) => $borderColor};
+  background: ${({ $backgroundColor }) => $backgroundColor};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -137,7 +152,7 @@ const NotificationContent = styled.div<{
   align-items: flex-start;
   gap: 16px;
   animation: slideInRight 0.3s ease-out;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   
   @keyframes slideInRight {
     from {
@@ -183,19 +198,19 @@ const NotificationTitle = styled.div`
 
 const NotificationMessage = styled.div`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: #A1A1AA;
   line-height: 1.4;
   margin-bottom: 8px;
 `;
 
 const NotificationDetails = styled.div`
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: #A1A1AA;
   font-family: 'Courier New', monospace;
-  background: ${({ theme }) => theme.colors.background};
+  background: rgba(15, 15, 35, 0.8);
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid rgba(255, 255, 255, 0.1);
   word-break: break-all;
   line-height: 1.3;
 `;
@@ -203,7 +218,7 @@ const NotificationDetails = styled.div`
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: #A1A1AA;
   font-size: 16px;
   cursor: pointer;
   padding: 4px;
@@ -212,7 +227,7 @@ const CloseButton = styled.button`
   flex-shrink: 0;
   
   &:hover {
-    background: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text};
+    background: rgba(15, 15, 35, 0.8);
+    color: #FFFFFF;
   }
 `;

@@ -29,7 +29,7 @@ export function MainNav() {
     <NavBar>
       <FlexRow>
         <LogoBox>
-          <LogoImage src="/kalemarkets.png" alt="Sonic Predict" />
+          <LogoImage src="/sonicpredictlogo.png" alt="Sonic Predict" />
           <span style={{ fontWeight: 700, fontSize: 22, letterSpacing: 1 }}>Sonic Predict</span>
         </LogoBox>
         <NavLinks>
@@ -54,22 +54,22 @@ export function MainNav() {
 }
 
 const NavBar = styled.nav`
-  background: ${({ theme }) => theme.colors.secondary}cc;
-  backdrop-filter: blur(10px);
+  background: rgba(15, 15, 35, 0.8);
+  backdrop-filter: blur(20px);
   padding: 0 32px;
   height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  border-bottom: 2.5px solid ${({ theme }) => theme.colors.primary};
+  border-bottom: 2px solid rgba(127, 90, 240, 0.3);
   font-size: 1.1rem;
   font-weight: 600;
   width: 100vw;
   box-sizing: border-box;
   z-index: 100;
   position: relative;
-  box-shadow: 0 4px 24px 0 ${({ theme }) => `${theme.colors.primary}22`};
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   @media (max-width: 1100px) {
     flex-wrap: wrap;
     height: auto;
@@ -90,6 +90,13 @@ const LogoImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 8px;
+  filter: drop-shadow(0 2px 8px rgba(127, 90, 240, 0.3));
+  transition: all 0.3s ease;
+  
+  &:hover {
+    filter: drop-shadow(0 4px 16px rgba(127, 90, 240, 0.5));
+    transform: scale(1.05);
+  }
 `;
 
 const NavLinks = styled.div`
@@ -115,7 +122,16 @@ const LogoBox = styled.div`
   font-size: 1.2em;
   padding: 8px 18px 8px 0;
   border-radius: 16px;
-  background: none;
+  background: rgba(127, 90, 240, 0.1);
+  border: 1px solid rgba(127, 90, 240, 0.2);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(127, 90, 240, 0.15);
+    border-color: rgba(127, 90, 240, 0.4);
+    transform: translateY(-1px);
+  }
+  
   @media (max-width: 1100px) {
     justify-content: center;
     width: 100%;
@@ -127,14 +143,24 @@ const LogoBox = styled.div`
 const SearchBox = styled.div`
   display: flex;
   align-items: center;
-  background: ${({ theme }) => theme.colors.background};
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   padding: 6px 16px 6px 12px;
   min-width: 220px;
   max-width: 320px;
   margin: 0 24px;
   flex: 0 0 320px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(127, 90, 240, 0.3);
+    box-shadow: 0 6px 24px rgba(127, 90, 240, 0.2);
+  }
+  
   @media (max-width: 1100px) {
     margin: 8px 0;
     width: 100%;
@@ -148,12 +174,12 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   background: transparent;
-  color: ${({ theme }) => theme.colors.text};
+  color: #FFFFFF;
   font-size: 1.08rem;
   padding: 4px 0;
   width: 100%;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.textSecondary};
+    color: #A1A1AA;
     opacity: 0.7;
   }
 `;
@@ -163,13 +189,22 @@ const WalletBox = styled.div`
   align-items: center;
   justify-content: flex-end;
   flex: 0 0 auto;
-  background: ${({ theme }) => theme.colors.card}ee;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-  border: 1.5px solid ${({ theme }) => theme.colors.primary}33;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(127, 90, 240, 0.3);
   padding: 6px 12px;
   max-width: 400px;
   min-width: 280px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(127, 90, 240, 0.5);
+    box-shadow: 0 6px 24px rgba(127, 90, 240, 0.3);
+  }
+  
   @media (max-width: 1100px) {
     width: 100%;
     justify-content: center;
@@ -181,16 +216,18 @@ const WalletBox = styled.div`
 `;
 
 const NavLink = styled(Link)<{ $active?: boolean }>`
-  color: ${({ theme, $active }) => $active ? theme.colors.primary : theme.colors.textSecondary};
+  color: ${({ $active }) => $active ? '#7F5AF0' : '#A1A1AA'};
   font-weight: ${({ $active }) => $active ? "bold" : "normal"};
   text-decoration: none;
   font-size: 20px;
   padding: 8px 18px 4px 18px;
   border-radius: 12px;
   position: relative;
-  background: ${({ $active, theme }) => $active ? `linear-gradient(90deg, ${theme.colors.primary}22 0%, ${theme.colors.accentGreen}22 100%)` : 'none'};
-  box-shadow: ${({ $active }) => $active ? '0 4px 18px 0 rgba(127,90,240,0.10)' : 'none'};
-  transition: color 0.22s, background 0.22s, box-shadow 0.22s, font-weight 0.22s, padding 0.22s;
+  background: ${({ $active }) => $active ? 'rgba(127, 90, 240, 0.1)' : 'transparent'};
+  box-shadow: ${({ $active }) => $active ? '0 4px 18px rgba(127, 90, 240, 0.2)' : 'none'};
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  
   &::after {
     content: '';
     display: ${({ $active }) => $active ? 'block' : 'none'};
@@ -200,16 +237,19 @@ const NavLink = styled(Link)<{ $active?: boolean }>`
     bottom: 2px;
     height: 3px;
     border-radius: 2px;
-    background: linear-gradient(90deg, #7f5af0 0%, #00d4ff 100%);
-    box-shadow: 0 2px 8px #7f5af044;
+    background: linear-gradient(90deg, #7F5AF0 0%, #2CB67D 100%);
+    box-shadow: 0 2px 8px rgba(127, 90, 240, 0.4);
     opacity: 0.85;
   }
+  
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-    background: ${({ $active, theme }) => $active ? `linear-gradient(90deg, ${theme.colors.primary}33 0%, ${theme.colors.accentGreen}33 100%)` : `${theme.colors.primary}10`};
-    box-shadow: ${({ $active }) => $active ? '0 8px 32px 0 rgba(127,90,240,0.13)' : '0 2px 8px rgba(127,90,240,0.10)'};
+    color: #7F5AF0;
+    background: ${({ $active }) => $active ? 'rgba(127, 90, 240, 0.15)' : 'rgba(127, 90, 240, 0.1)'};
+    box-shadow: ${({ $active }) => $active ? '0 8px 32px rgba(127, 90, 240, 0.3)' : '0 4px 16px rgba(127, 90, 240, 0.2)'};
     padding: 8px 22px 4px 22px;
+    transform: translateY(-1px);
   }
+  
   @media (max-width: 1100px) {
     font-size: 17px;
     padding: 6px 10px 2px 10px;
@@ -219,22 +259,24 @@ const NavLink = styled(Link)<{ $active?: boolean }>`
 const SonicScoreBox = styled.div`
   display: flex;
   align-items: center;
-  background: ${({ theme }) => theme.colors.card};
+  background: rgba(127, 90, 240, 0.1);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(127,90,240,0.10);
+  box-shadow: 0 4px 16px rgba(127, 90, 240, 0.2);
   padding: 6px 14px;
   margin: 0 10px 0 0;
   font-size: 1.08rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.primary};
+  color: #7F5AF0;
   min-width: 60px;
   height: 38px;
-  border: 1px solid ${({ theme }) => theme.colors.primary}33;
-  transition: all 0.2s ease;
+  border: 1px solid rgba(127, 90, 240, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
   
   &:hover {
-    box-shadow: 0 4px 16px rgba(127,90,240,0.20);
-    transform: translateY(-1px);
+    background: rgba(127, 90, 240, 0.15);
+    box-shadow: 0 6px 24px rgba(127, 90, 240, 0.3);
+    transform: translateY(-2px);
   }
   
   @media (max-width: 800px) {
@@ -246,9 +288,9 @@ const SonicScoreBox = styled.div`
 
 const SonicScoreValue = styled.span`
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.primary};
+  color: #7F5AF0;
   font-size: 1.08em;
-  text-shadow: 0 1px 2px rgba(127,90,240,0.3);
+  text-shadow: 0 1px 2px rgba(127, 90, 240, 0.3);
   min-width: 30px;
   text-align: center;
 `;
@@ -256,22 +298,24 @@ const SonicScoreValue = styled.span`
 const BalanceBox = styled.div`
   display: flex;
   align-items: center;
-  background: ${({ theme }) => theme.colors.card};
+  background: rgba(44, 182, 125, 0.1);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(127,90,240,0.10);
+  box-shadow: 0 4px 16px rgba(44, 182, 125, 0.2);
   padding: 6px 14px;
   margin: 0 10px 0 0;
   font-size: 1.08rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.primary};
+  color: #2CB67D;
   min-width: 60px;
   height: 38px;
-  border: 1px solid ${({ theme }) => theme.colors.primary}33;
-  transition: all 0.2s ease;
+  border: 1px solid rgba(44, 182, 125, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
   
   &:hover {
-    box-shadow: 0 4px 16px rgba(127,90,240,0.20);
-    transform: translateY(-1px);
+    background: rgba(44, 182, 125, 0.15);
+    box-shadow: 0 6px 24px rgba(44, 182, 125, 0.3);
+    transform: translateY(-2px);
   }
   
   @media (max-width: 800px) {
@@ -283,9 +327,9 @@ const BalanceBox = styled.div`
 
 const BalanceValue = styled.span`
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.primary};
+  color: #2CB67D;
   font-size: 1.08em;
-  text-shadow: 0 1px 2px rgba(127,90,240,0.3);
+  text-shadow: 0 1px 2px rgba(44, 182, 125, 0.3);
   min-width: 30px;
   text-align: center;
 `;

@@ -180,8 +180,10 @@ const BetDetails = styled.div`
 const DetailRow = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
   
   &:last-child {
     margin-bottom: 0;
@@ -192,6 +194,8 @@ const DetailLabel = styled.span`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-weight: 500;
   font-size: 14px;
+  min-width: 80px;
+  flex-shrink: 0;
 `;
 
 const DetailValue = styled.span<{ $side?: 'yes' | 'no' }>`
@@ -202,6 +206,9 @@ const DetailValue = styled.span<{ $side?: 'yes' | 'no' }>`
   };
   font-weight: 600;
   font-size: 14px;
+  flex: 1;
+  text-align: right;
+  word-break: break-word;
 `;
 
 const TotalAmount = styled.span`
