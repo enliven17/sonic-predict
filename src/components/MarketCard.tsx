@@ -171,16 +171,8 @@ export const MarketCard: React.FC<Props> = ({ market, onClick }) => {
       
       console.log('Creating bet with signature and payment:', betData);
       
-      // Add bet to Redux store
+      // Add bet to Redux store (this will also save to localStorage)
       dispatch(addBet(betData));
-      
-      // Save to localStorage for persistence
-      const existingBets = JSON.parse(localStorage.getItem('sonic_user_bets') || '{}');
-      if (!existingBets[address]) {
-        existingBets[address] = [];
-      }
-      existingBets[address].push(betData);
-      localStorage.setItem('sonic_user_bets', JSON.stringify(existingBets));
       
       // Show success modal instead of alert
       setSuccessBetData({
